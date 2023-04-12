@@ -10,7 +10,8 @@
       </button>
     </div>
     <div class="tabs__body">
-      <component :is="currentTabName" :tabData="currentTabData"></component>
+      <component :is="currentTabName" :tabData="currentTabData"
+        @onShowDialog="$emit('onShowDialog')"></component>
     </div>
   </div>
 </template>

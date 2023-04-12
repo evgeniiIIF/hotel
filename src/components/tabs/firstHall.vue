@@ -19,7 +19,8 @@
           </li>
         </ul>
         <div class="card-first-hall__buttons">
-          <div class="card-first-hall__button">
+          <div class="card-first-hall__button"
+            @click="$emit('onShowDialog')">
             <baseButton>Забронировать</baseButton>
           </div>
           <div class="card-first-hall__button">

@@ -4,7 +4,7 @@
       <div class="header__body">
         <div class="header__left">
           <div class="header__burger burger-icon"
-            @click="showMobileMenu = !showMobileMenu">
+            @click="$emit('onShowMobileMenu')">
             <div class="burger-icon__body">
               <span class="burger-icon__item burger-icon__item--top"></span>
               <span class="burger-icon__item burger-icon__item--middle"></span>
@@ -43,14 +43,18 @@
             </div>
             <div class="contacts-header__phone phone-header">
               <a class="phone-header__number" href="tel:+7123456789">+7 (123) 45-67-89</a>
-              <button class="phone-header__feedback" type="button">Перезвоните мне</button>
+              <button class="phone-header__call-me"
+                @click="$emit('onShowDialog')"
+                type="button">Перезвоните мне</button>
             </div>
           </div>
           <nav class="header__menu menu-header">
             <ul class="menu-header__list">
               <li class="menu-header__item"
                 v-for="menuItem in menuItems" :key="menuItem">
-                <a href="menuItem" class="menu-header__link">{{ menuItem }}</a>
+                <a class="menu-header__link"
+                  :href="'#' + menuItem"
+                  @click="$emit('onGoToAnchor')">{{ menuItem }}</a>
               </li>
             </ul>
           </nav>
@@ -71,13 +75,20 @@ import baseButton from '../UI/base-button.vue';
 
 export default {
   name: 'vHeader',
+  props: {
+    showMobileMenu: {
+      type: Boolean,
+      required: true,
+      default: false
+    }
+
+  },
   mixins: [mobileMixin, bodyLockMixin],
   components: {
     baseButton
   },
   data() {
     return {
-      showMobileMenu: false,
       menuItems: [
         'Расчёт стоимости',
         'О нас',
@@ -105,6 +116,10 @@ export default {
 <style lang='scss'>
 @import '@/assets/scss/mixins.scss';
 @import '@/assets/scss/smart-grid.scss';
+
+html {
+  scroll-behavior: smooth
+}
 
 .header {
   border: 1px solid #F7F7F8;
@@ -247,7 +262,7 @@ export default {
     color: #424343;
   }
 
-  &__feedback {
+  &__call-me {
     text-align: right;
     border: none;
     background: transparent;
@@ -424,7 +439,7 @@ export default {
     @include mb(40px);
   }
 
-  .phone-header__feedback {
+  .phone-header__call-me {
     text-align: left;
   }
 

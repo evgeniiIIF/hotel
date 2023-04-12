@@ -1,10 +1,11 @@
 <template>
-  <section class='schemes'>
+  <section class='schemes' id="Схемы залов">
     <div class="container">
       <div class="schemes__body">
         <h5 class="schemes__title"></h5>
         <div class="schemes__tabs">
-          <TabsUIFC :tabs="tabs" />
+          <TabsUIFC :tabs="tabs"
+            @onShowDialog="$emit('onShowDialog')" />
         </div>
       </div>
     </div>

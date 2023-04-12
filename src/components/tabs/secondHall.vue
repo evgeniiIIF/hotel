@@ -19,7 +19,8 @@
           </li>
         </ul>
         <div class="card-second-hall__buttons">
-          <div class="card-second-hall__button">
+          <div class="card-second-hall__button"
+            @click="$emit('onShowDialog')">
             <baseButton>Забронировать</baseButton>
           </div>
           <div class="card-second-hall__button">
@@ -75,7 +76,7 @@ export default {
     margin-left: 231px;
 
     img {
-      transform: rotate(45deg);
+      transform: rotate(180deg);
     }
 
     @include to(1350px) {

@@ -1,5 +1,5 @@
 <template>
-  <section class='questions'>
+  <section class='questions' id="Расчёт стоимости">
     <div class="container">
       <div class="questions__body">
         <h2 class="questions__title">Рассчитайте стоимость вашего банкета</h2>

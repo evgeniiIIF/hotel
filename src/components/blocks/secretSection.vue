@@ -1,5 +1,5 @@
 <template>
-  <section class='secret'>
+  <section class='secret' id="Выездная регистрация">
     <div class="container">
       <div class="secret__body">
         <div class="secret__content">

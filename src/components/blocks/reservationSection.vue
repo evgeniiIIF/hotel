@@ -9,7 +9,10 @@
             <img src="../../assets/img/main/reservation/STRO0974.jpg" alt="example image">
           </picture>
           <h1 class="reservation__title">Изысканный свадебный зал с панорамным видом на город</h1>
-          <form class="reservation__form form-reservation" action="#" ref="formReservation">
+          <div class="reservation__form" ref="formReservation">
+            <VForm :formData="reservationForm" @onShowDialog="$emit('onShowDialog')" />
+          </div>
+          <!-- <form class="reservation__form form-reservation" action="#" ref="formReservation">
             <h5 class="form-reservation__title">Узнайте свободные даты и забронируйте зал</h5>
             <div class="form-reservation__input" v-for="item in reservationForm" :key="item.name">
               <inputInLabel :opts="item" />
@@ -17,7 +20,7 @@
             <div class="form-reservation__button">
               <baseButton>Забронировать</baseButton>
             </div>
-          </form>
+          </form> -->
         </div>
       </div>
     </div>
@@ -26,22 +29,23 @@
 
 <script>
 import mobileMixin from '@/mixins/mobileMode';
-import inputInLabel from '../UI/input-in-label.vue';
-import baseButton from '../UI/base-button.vue';
+import VForm from '../elements/VForm.vue';
 
 export default {
   name: 'reservation',
   mixins: [mobileMixin],
   components: {
-    inputInLabel,
-    baseButton
+    VForm
   },
   data() {
     return {
-      reservationForm: [
-        { type: 'text', label: 'Ваше имя', name: "name", value: "Иван", placeholder: 'Имя' },
-        { type: 'tel', label: 'Ваш номер телефона', name: "tel", placeholder: "+7 (___) ___-__-__" }
-      ]
+      reservationForm: {
+        title: 'Узнайте свободные даты и забронируйте зал',
+        inputs: [
+          { type: 'text', label: 'Ваше имя', name: "name", value: "Иван", placeholder: 'Имя' },
+          { type: 'tel', label: 'Ваш номер телефона', name: "tel", placeholder: "+7 (___) ___-__-__" }
+        ]
+      }
     }
   },
   watch: {
@@ -119,50 +123,56 @@ export default {
     position: relative;
     flex: 0 0 382px;
 
-  }
-}
+    .form {
 
-.form-reservation {
-  display: flex;
-  flex-direction: column;
 
-  padding: 32px 40px 48px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  border-radius: 16px;
+      padding: 32px 40px 48px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
 
-  @include mb(16px);
+      @include to(992px) {
+        padding-top: 12px;
+        border-radius: 0;
+      }
 
-  @include to(992px) {
-    border-radius: 0;
-  }
+      &__body {
+        display: flex;
+        flex-direction: column;
 
-  &__title {
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 133%;
-    color: #FFFFFF;
+        @include mb(16px);
+      }
 
-    @include to(992px) {
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 28px;
-      color: #18191B;
-    }
-  }
 
-  &__input {
-    @include to(992px) {
-      .input-in-label {
-        &__label {
-          color: #ACADA5;
+
+      &__title {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 133%;
+        color: #FFFFFF;
+
+        @include to(992px) {
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 28px;
+          color: #18191B;
         }
       }
-    }
-  }
 
-  &__button {
-    align-self: start;
+      &__input {
+        @include to(992px) {
+          .input-in-label {
+            &__label {
+              color: #ACADA5;
+            }
+          }
+        }
+      }
+
+      &__button {
+        align-self: start;
+      }
+    }
   }
 }
 </style>
